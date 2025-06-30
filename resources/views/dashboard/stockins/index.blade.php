@@ -92,7 +92,7 @@
                                     Batal
                                 </button>
                                 <button type="submit"
-                                    class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow cursor-pointer">
+                                    class="px-4 py-2 text-sm bg-green-600 hover:bg-green-700 text-white rounded-lg shadow cursor-pointer">
                                     Simpan
                                 </button>
                             </div>
@@ -176,7 +176,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-4 py-4 text-center text-gray-500">Belum ada data barang masuk.
+                            <td colspan="7" class="px-4 py-4 text-center text-gray-500">Belum ada data barang masuk.
                             </td>
                         </tr>
                     @endforelse
