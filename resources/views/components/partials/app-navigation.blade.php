@@ -55,8 +55,8 @@
         </a>
 
         {{-- Barang Masuk --}}
-        <a href="#"
-            class="flex items-center space-x-3 px-4 py-2 rounded hover:bg-[#3c516d] {{ Route::is('#') ? 'bg-[#5b7a9f]' : '' }}">
+        <a href="{{ route('dashboard.stockin.index') }}"
+            class="flex items-center space-x-3 px-4 py-2 rounded hover:bg-[#3c516d] {{ Route::is('dashboard.stockin.*') ? 'bg-[#5b7a9f]' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-mailbox2" viewBox="0 0 16 16">
                 <path d="M9 8.5h2.793l.853.854A.5.5 0 0 0 13 9.5h1a.5.5 0 0 0 .5-.5V8a.5.5 0 0 0-.5-.5H9z" />

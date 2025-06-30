@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
 use App\Http\Controllers\Dashboard\ItemController;
+use App\Http\Controllers\Dashboard\StockInController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -32,4 +33,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/data-barang/{id}/ubah', [ItemController::class, 'edit'])->name('dashboard.item.edit');
     Route::put('/dashboard/data-barang/{id}/ubah', [ItemController::class, 'update'])->name('dashboard.item.update');
     Route::delete('/dashboard/data-barang/{id}/hapus', [ItemController::class, 'destroy'])->name('dashboard.item.destroy');
+
+    // Data Barang Masuk
+    Route::get('/dashboard/barang-masuk', [StockInController::class, 'index'])->name('dashboard.stockin.index');
+    Route::get('/dashboard/barang-masuk/tambah', [StockInController::class, 'create'])->name('dashboard.stockin.create');
+    Route::post('/dashboard/barang-masuk/tambah', [StockInController::class, 'store'])->name('dashboard.stockin.store');
+    Route::get('/dashboard/barang-masuk/{id}/ubah', [StockInController::class, 'edit'])->name('dashboard.stockin.edit');
+    Route::put('/dashboard/barang-masuk/{id}/ubah', [StockInController::class, 'update'])->name('dashboard.stockin.update');
+    Route::delete('/dashboard/barang-masuk/{id}/hapus', [StockInController::class, 'destroy'])->name('dashboard.stockin.destroy');
 });
