@@ -33,8 +33,8 @@
         </a>
 
         {{-- Data Pegawai --}}
-        <a href="#"
-            class="flex items-center space-x-3 px-4 py-2 rounded hover:bg-[#3c516d] {{ Route::is('#') ? 'bg-[#5b7a9f]' : '' }}">
+        <a href="{{ route('dashboard.employee.index') }}"
+            class="flex items-center space-x-3 px-4 py-2 rounded hover:bg-[#3c516d] {{ Route::is('dashboard.employee.*') ? 'bg-[#5b7a9f]' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
                 <path

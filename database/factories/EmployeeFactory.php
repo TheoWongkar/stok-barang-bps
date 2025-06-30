@@ -19,7 +19,7 @@ class EmployeeFactory extends Factory
         return [
             'name' => fake()->name(),
             'department' => fake()->randomElement(['Kepegawaian', 'Keuangan', 'IPDS']),
-            'phone' => fake()->phoneNumber(),
+            'phone' => fake()->numerify('08##########'),
             'gender' => fake()->randomElement(['Laki-Laki', 'Perempuan']),
         ];
     }
