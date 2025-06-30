@@ -1,26 +1,26 @@
 <x-app-layout>
 
     {{-- Judul Halaman --}}
-    <x-slot name="title">Barang Masuk</x-slot>
+    <x-slot name="title">Barang Keluar</x-slot>
 
-    {{-- Bagian Data Barang Masuk --}}
+    {{-- Bagian Data Barang Keluar --}}
     <section>
         {{-- Header: Tombol dan Search --}}
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <div x-data="{ open: false, selectedItem: null, items: @js($items) }">
 
-                {{-- Tombol Tambah Barang Masuk --}}
+                {{-- Tombol Tambah Barang Keluar --}}
                 <button @click="open = true"
                     class="w-full md:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow text-center cursor-pointer">
-                    Tambah Barang Masuk
+                    Tambah Barang Keluar
                 </button>
 
                 {{-- Modal Form --}}
                 <div x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" x-cloak>
                     <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg relative">
-                        <h2 class="text-xl font-semibold mb-4">Tambah Barang Masuk</h2>
+                        <h2 class="text-xl font-semibold mb-4">Tambah Barang Keluar</h2>
 
-                        <form method="POST" action="{{ route('dashboard.stockin.store') }}" class="space-y-4">
+                        <form method="POST" action="{{ route('dashboard.stockout.store') }}" class="space-y-4">
                             @csrf
 
                             <div class="md:flex md:gap-6">
@@ -69,11 +69,24 @@
                                 </div>
                             </div>
 
-                            {{-- Jumlah Barang Masuk --}}
+                            {{-- Nama Penerima --}}
+                            <div x-data="{ selectedEmployee: '' }">
+                                <label for="employee_id"
+                                    class="block text-sm font-medium text-gray-700">Penerima</label>
+                                <select name="employee_id" x-model="selectedEmployee" required
+                                    class="mt-1 w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition">
+                                    <option value="">-- Pilih Penerima --</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- Jumlah Barang Keluar --}}
                             <div>
                                 <label for="quantity" class="block text-sm font-medium text-gray-700">Jumlah Barang
-                                    Masuk</label>
-                                <input type="number" name="quantity" id="quantity" min="1" required
+                                    Keluar</label>
+                                <input type="number" name="quantity" min="1" required
                                     class="mt-1 w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition">
                             </div>
 
@@ -102,7 +115,7 @@
             </div>
 
             {{-- Form Search --}}
-            <form method="GET" action="{{ route('dashboard.stockin.index') }}" class="w-full md:w-1/3 flex">
+            <form method="GET" action="{{ route('dashboard.stockout.index') }}" class="w-full md:w-1/3 flex">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama / SKU..."
                     autocomplete="off"
                     class="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -135,38 +148,42 @@
                 <thead class="bg-[#486284] text-xs text-white uppercase tracking-wide">
                     <tr>
                         <th class="px-2 py-3 text-center">#</th>
-                        <th class="px-4 py-3 text-left">Nama Barang</th>
-                        <th class="px-4 py-3 text-left">SKU</th>
-                        <th class="px-4 py-3 text-center">Jumlah Masuk</th>
+                        <th class="px-4 py-3 text-left whitespace-nowrap">Nama Barang</th>
+                        <th class="px-4 py-3 text-left whitespace-nowrap">SKU</th>
+                        <th class="px-4 py-3 text-center whitespace-nowrap">Jumlah Keluar</th>
+                        <th class="px-4 py-3 text-left">Penerima</th>
                         <th class="px-4 py-3 text-left">Catatan</th>
                         <th class="px-4 py-3 text-center">Tanggal</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
-                    @forelse ($stockIns as $stockIn)
+                    @forelse ($stockOuts as $stockOut)
                         <tr class="hover:bg-blue-50">
                             <td class="px-4 py-2 text-center">
                                 {{ $loop->iteration }}
                             </td>
                             <td class="px-4 py-2 font-medium whitespace-nowrap">
-                                {{ Str::limit($stockIn->item->name, 25, '...') }}
+                                {{ Str::limit($stockOut->item->name, 25, '...') }}
                             </td>
                             <td class="px-4 py-2 whitespace-nowrap">
-                                {{ $stockIn->item->sku }}
+                                {{ $stockOut->item->sku }}
                             </td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">
-                                {{ $stockIn->quantity }}
+                                {{ $stockOut->quantity }}
+                            </td>
+                            <td class="px-4 py-2 whitespace-nowrap">
+                                {{ Str::limit($stockOut->employee->name, 25, '...') }}
                             </td>
                             <td class="px-4 py-2 break-words max-w-xs">
-                                {{ $stockIn->note ?? '-' }}
+                                {{ $stockOut->note ?? '-' }}
                             </td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">
-                                {{ $stockIn->created_at->format('d M Y H:i') }}
+                                {{ $stockOut->created_at->format('d M Y H:i') }}
                             </td>
                             <td class="px-4 py-2 text-center">
-                                <form action="{{ route('dashboard.stockin.destroy', $stockIn->id) }}" method="POST"
-                                    onsubmit="return confirm('Yakin ingin menghapus data barang masuk ini?')">
+                                <form action="{{ route('dashboard.stockout.destroy', $stockOut->id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus data barang keluar ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -176,7 +193,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-4 py-4 text-center text-gray-500">Belum ada data barang masuk.
+                            <td colspan="6" class="px-4 py-4 text-center text-gray-500">Belum ada data barang keluar.
                             </td>
                         </tr>
                     @endforelse
@@ -186,7 +203,7 @@
 
         {{-- Pagination --}}
         <div class="mt-6">
-            {{ $stockIns->links('vendor.pagination.default') }}
+            {{ $stockOuts->links('vendor.pagination.default') }}
         </div>
     </section>
 

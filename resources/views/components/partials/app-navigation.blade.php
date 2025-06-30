@@ -67,8 +67,8 @@
         </a>
 
         {{-- Barang Keluar --}}
-        <a href="#"
-            class="flex items-center space-x-3 px-4 py-2 rounded hover:bg-[#3c516d] {{ Route::is('#') ? 'bg-[#5b7a9f]' : '' }}">
+        <a href="{{ route('dashboard.stockout.index') }}"
+            class="flex items-center space-x-3 px-4 py-2 rounded hover:bg-[#3c516d] {{ Route::is('dashboard.stockout.*') ? 'bg-[#5b7a9f]' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-mailbox2-flag" viewBox="0 0 16 16">
                 <path d="M10.5 8.5V3.707l.854-.853A.5.5 0 0 0 11.5 2.5v-2A.5.5 0 0 0 11 0H9.5a.5.5 0 0 0-.5.5v8z" />
