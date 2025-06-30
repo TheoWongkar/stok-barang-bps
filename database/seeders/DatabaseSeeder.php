@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Item;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\StockIn;
+use App\Models\Employee;
+use App\Models\StockOut;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +17,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Buat User Admin
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin BPS',
+            'email' => 'admin@bps.com',
         ]);
+
+        // Buat beberapa karyawan
+        $employees = Employee::factory()->count(10)->create();
+
+        // Buat item stok
+        $items = Item::factory()->count(10)->create();
+
+        foreach ($items as $item) {
+            // Buat stok masuk
+            $stockIns = StockIn::factory()->count(3)->create([
+                'item_id' => $item->id,
+            ]);
+
+            // Buat stok keluar dengan employee acak
+            $stockOuts = StockOut::factory()->count(2)->create([
+                'item_id' => $item->id,
+                'employee_id' => $employees->random()->id,
+            ]);
+
+            // Hitung ulang stok = total masuk - total keluar
+            $totalIn = $stockIns->sum('quantity');
+            $totalOut = $stockOuts->sum('quantity');
+            $item->update(['stock' => $totalIn - $totalOut]);
+        }
     }
 }
