@@ -20,6 +20,7 @@ class EmployeeFactory extends Factory
             'name' => fake()->name(),
             'department' => fake()->randomElement(['Kepegawaian', 'Keuangan', 'IPDS']),
             'phone' => fake()->phoneNumber(),
+            'gender' => fake()->randomElement(['Laki-Laki', 'Perempuan']),
         ];
     }
 }

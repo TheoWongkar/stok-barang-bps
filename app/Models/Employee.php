@@ -14,6 +14,7 @@ class Employee extends Model
         'name',
         'department',
         'phone',
+        'gender',
     ];
 
     // Relasi: 1 employee bisa punya banyak pengeluaran stok

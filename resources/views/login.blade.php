@@ -2,7 +2,7 @@
 
     {{-- Bagian Login --}}
     <section class="fixed inset-0 overflow-hidden bg-cover bg-center flex items-center justify-center"
-        style="background-image: url('https://sindomanado.com/wp-content/uploads/2022/12/kantor-bps-sulut.jpg')">
+        style="background-image: url('{{ asset('img/hero-img.webp') }}')">
         {{-- Overlay --}}
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
 
@@ -37,7 +37,7 @@
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <div class="relative">
                             <input id="email" name="email" type="email" required autofocus
-                                class="mt-1 w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition">
+                                class="mt-1 w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition">
 
                             {{-- Icon di tengah --}}
                             <div class="absolute inset-y-0 left-3 flex items-center text-gray-400">
@@ -60,7 +60,7 @@
                         <div class="relative">
                             <!-- Input -->
                             <input :type="show ? 'text' : 'password'" id="password" name="password" required
-                                class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition">
+                                class="w-full pl-10 pr-10 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition">
 
                             <!-- Icon Kunci (Kiri) -->
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
