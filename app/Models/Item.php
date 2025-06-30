@@ -12,9 +12,9 @@ class Item extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'sku',
         'stock',
-        'unit'
     ];
 
     // Relasi: 1 item punya banyak stok masuk

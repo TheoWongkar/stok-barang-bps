@@ -18,9 +18,9 @@ class ItemFactory extends Factory
     {
         return [
             'name' => fake()->word(),
+            'description' => fake()->sentence(),
             'sku' => strtoupper(fake()->unique()->bothify('SKU-###')),
             'stock' => fake()->numberBetween(10, 100),
-            'unit' => fake()->randomElement(['pcs', 'kg', 'ltr']),
         ];
     }
 }

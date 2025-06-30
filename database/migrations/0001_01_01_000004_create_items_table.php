@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('sku');
+            $table->text('description');
+            $table->string('sku')->unique();
             $table->integer('stock');
-            $table->string('unit');
             $table->timestamps();
         });
 
